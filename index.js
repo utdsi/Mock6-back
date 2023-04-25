@@ -7,6 +7,8 @@ require('dotenv').config()
 const {connection} = require("./config/db.js")
 const {userRouter} = require("./routes/users.route.js")
 const {flightRouter} = require("./routes/flight.route.js")
+const {bookingRouter} = require("./routes/booking.route.js")
+const {auth} = require("./middleware/auth.js")
 
 app.get("/",(req,res)=>{
     res.send("welcome to airticket booking system")
@@ -14,6 +16,7 @@ app.get("/",(req,res)=>{
 
 app.use("/",userRouter)
 app.use("/",flightRouter)
+app.use("/",auth,bookingRouter)
 
 
 app.listen(process.env.port,async()=>{

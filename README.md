@@ -3,6 +3,7 @@
 #end-points
 
 ##register
+<br>
 METHOD: "POST"
 ```javascript
 https://splendid-mite-bonnet.cyclic.app/api/register

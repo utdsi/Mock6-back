@@ -8,7 +8,7 @@ const userRouter = express.Router()
 
 const{UserModel} = require("../model/users.model.js")
 
-userRouter.post("/signup",async (req,res)=>{
+userRouter.post("/api/register",async (req,res)=>{
 
     const {name,email,password} = req.body
 
@@ -22,7 +22,7 @@ userRouter.post("/signup",async (req,res)=>{
 
                 const user = await new UserModel({name,email,password:hash})
                 await user.save()
-                res.send("signup successfull")
+                res.status(201).send("signup successfull")
             }
         });
     } catch (error) {
@@ -32,7 +32,7 @@ userRouter.post("/signup",async (req,res)=>{
     }
 })
 
-userRouter.post("/login",async(req,res)=>{
+userRouter.post("/api/login",async(req,res)=>{
 
     const {email,password} = req.body
 
@@ -49,7 +49,7 @@ userRouter.post("/login",async(req,res)=>{
                 if(result){
                     const token = jwt.sign({ "userId":user._id }, process.env.jwtpasscode)
 
-                    res.send({"msg":"login successfull","token":token})
+                    res.status(201).send({"msg":"login successfull","token":token})
                 }else{
                     res.send("login failed")
                 }
